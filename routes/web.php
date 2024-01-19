@@ -23,5 +23,5 @@ Route::get('/', function () {
 });//1
 Route::get('/Register',[\App\Http\Controllers\Controller::class,'getRegister']);//needs styling//22a
 Route::post('/Register',[\App\Http\Controllers\Controller::class,'Register'])->name('register');//33a
-Route::get('/login',[\App\Http\Controllers\Controller::class,'getLogin']);//22b,,needs styling
-Route::post('/login',[\App\Http\Controllers\Controller::class,'Login'])->name('login');//33b
+Route::get('/login',[\App\Http\Controllers\Controller::class,'getLogin'])->name('login');//22b,,needs styling
+Route::post('/loginpost',[\App\Http\Controllers\Controller::class,'Login'])->name('loginpost');//33b

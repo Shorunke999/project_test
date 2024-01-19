@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use Helper;
 
+use Illuminate\Support\Facades\Mail;
+
 class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
@@ -32,7 +34,9 @@ class Controller extends BaseController
             ]);//name,email,password are only fillable in the model
             Auth::login($valid_user);
             //dd($request);
-            Helper::Mail($request);
+            //Helper::Mail($request);
+            
+            Mail::to($request->email)->send(new \App\Mail\AuthMail());
             return redirect('/dashboard');
         }else{
             //dd($request);
@@ -45,18 +49,18 @@ class Controller extends BaseController
         return view('login');
     }
     public function Login(Request $request){
-        $request->validate([
-            'email' => 'required|email|unique:users,email',
+       $request->validate([
+            'email' => 'required|email',
             'password' => 'required'
         ]);
         $db_user = User::where('email',$request->email)->first();
-        $validate =Validator::make($request->all(),$db_user);
+        $validate =Hash::check($request->password, $db_user->password);
         if ($validate){
             Auth::login($db_user);
-            Helper::Mail($request);
+            //Helper::Mail($request);
             return view('dashboard');
         }else{
-            return redirect('/Register')
+            return redirect()->back()
             ->with('msg','pls make sure to input correct data');
         }
     }

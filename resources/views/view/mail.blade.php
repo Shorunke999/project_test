@@ -4,7 +4,7 @@
 
 @section('content')
     <div>
-        Hi {{name}}, you have authenticated into the platform!
+        Hi {{$name}}, you have authenticated into the platform!
         logged in!
     </div>
 @endsection

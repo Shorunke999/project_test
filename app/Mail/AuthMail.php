@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Http\Request;
 
-class AuthMail extends Mailable implements ShouldQueue
+class AuthMail extends Mailable
 {
     use Queueable, SerializesModels;
   

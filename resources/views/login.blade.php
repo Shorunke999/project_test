@@ -3,19 +3,20 @@
 @section('title', 'Login')
 
 @section('content')
-    <form method="post" action="{{route('login')}}">
-        <div class="">
-            <label for="name">Input Name</label>
-            <input type="text" name="name" value="{{__old('name')}}">
-        </div>
+    <form method="post" action="{{route('loginpost')}}">
         <div class="">
             <label for="email">Input Email</label>
-            <input type="text" name="email" value="{{__old('email')}}">
-        </div>
+            <input type="text" name="email" value="{{old('email')}}">
+        </div>    
         <div class="">
             <label for="password">Input Password</label>
-            <input type="text" name="password" value="{{__old('password')}}">
+            <input type="text" name="password" value="{{old('password')}}">
         </div>
         <button type="submit">Submit form</button>
     </form>
+    @if(session('msg'))
+        <div>
+            {{session('msg')}}
+        </div>
+    @endif
 @endsection
