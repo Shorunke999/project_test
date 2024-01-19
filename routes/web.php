@@ -16,8 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('custom_middleware')->group(function(){
     Route::get('/dashboard',[\App\Http\Controllers\Controller::class,'Dashboard'])->name('dash');//needs styling
-    Route::get('/uploadProfilePics',[\App\Http\Controllers\uploadController::class,'getPicsForm']);//needs styling
-    Route::post('/uploadProfilePics',[\App\Http\Controllers\uploadController::class,'save_pics_path']);
+    Route::post('/uploadProfilePics',[\App\Http\Controllers\uploadController::class,'save_pics_path'])->name('pics');
 });
 Route::get('/', function () {
     return view('welcome');//needs styling;

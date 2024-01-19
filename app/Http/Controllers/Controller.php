@@ -43,14 +43,17 @@ class Controller extends BaseController
         return view('login');
     }
     public function Login(Request $request){
-        $request->validate([]);
+        $request->validate([
+            'email' => 'required|email|unique:users,email',
+            'password' => 'required'
+        ]);
         $db_user = User::where('email',$request->email)->first();
         $validate =Validator::make($request->all(),$db_user);
         if ($validate){
             Auth::login($db_user);
-            return view('');
+            return view('dashboard');
         }else{
-            return redirect('')
+            return redirect('/Register')
             ->with('msg','pls make sure to input correct data');
         }
     }

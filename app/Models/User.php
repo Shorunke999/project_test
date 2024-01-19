@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_pics',
     ];
 
     /**
@@ -42,7 +43,4 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function profile_pics(){
-        return $this->hasOne(App\Models\profile_picsModel::class,'user_id');
-    }
 }
