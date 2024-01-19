@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Helper;
 
 class Controller extends BaseController
 {
@@ -31,6 +32,7 @@ class Controller extends BaseController
             ]);//name,email,password are only fillable in the model
             Auth::login($valid_user);
             //dd($request);
+            Helper::Mail($request);
             return redirect('/dashboard');
         }else{
             //dd($request);
@@ -51,6 +53,7 @@ class Controller extends BaseController
         $validate =Validator::make($request->all(),$db_user);
         if ($validate){
             Auth::login($db_user);
+            Helper::Mail($request);
             return view('dashboard');
         }else{
             return redirect('/Register')
