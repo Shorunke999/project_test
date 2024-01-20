@@ -31,12 +31,10 @@ class Controller extends BaseController
             'name' => $request->name,
             'email'=>$request->email,
             'password'=> Hash::make($request->password)
-            ]);//name,email,password are only fillable in the model
+            ]);
             Auth::login($valid_user);
             //dd($request);
             //Helper::Mail($request);
-            
-            Mail::to($request->email)->send(new \App\Mail\AuthMail());
             return redirect('/dashboard');
         }else{
             //dd($request);

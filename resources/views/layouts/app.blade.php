@@ -6,38 +6,59 @@
     <title>@yield('title', 'Your App Title')</title>
     <style>
         body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0; 
+            background-color: #f4f4f4; 
         }
 
-        header {
-            background-color: #333;
-            color: white;
+        header, footer {
+            background-color: cadetblue; 
+            color: #805656; 
             padding: 10px;
             text-align: center;
+            width: 100%; 
         }
 
         main {
+            flex: 1; 
             display: flex;
-            justify-content: space-between;
+            align-items: center; 
+            justify-content: center;
+        }
+
+        .form-container {
+            width: 400px;
             padding: 20px;
-        }
-
-        main > div {
-            flex: 1;
-            margin-right: 20px;
-        }
-
-        footer {
-            background-color: #333;
-            color: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
+            box-sizing: border-box; 
+        }
+
+        .form-container div {
+            margin-bottom: 15px;
+        }
+
+
+        .form-container label {
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+
+        .form-container input {
             width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 3px;
         }
 
         .profile-pic {
@@ -45,19 +66,18 @@
             max-width: 200px;
             height: auto;
         }
+
+        .top-right {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+        }
     </style>
 </head>
 <body>
     <header>
         <h1>Your App</h1>
-    </header>
-
-    <main>
-        <div>
-            @yield('content')
-        </div>
-
-        <div>
+        <div class="top-right">
             @auth
                 @if(auth()->user()->profile_pics)
                     <img src="{{ asset('storage/' . auth()->user()->profile_pics) }}" alt="Profile Picture" class="profile-pic">
@@ -66,6 +86,10 @@
                 @endif
             @endauth
         </div>
+    </header>
+
+    <main>
+        @yield('content')
     </main>
 
     <footer>
